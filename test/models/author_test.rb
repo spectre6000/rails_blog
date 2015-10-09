@@ -48,10 +48,11 @@ class AuthorTest < ActiveSupport::TestCase
 
   test "email should not accept valid formats" do 
     invalid_emails = [  "author@example,com",
-                      "AUTHOR_at_example.com", 
-                      "AN_AUTH-or@example",
-                      "example@author_example.cn",
-                      "example@author+test.de" ]
+                        "author@example..com",
+                        "AUTHOR_at_example.com", 
+                        "AN_AUTH-or@example",
+                        "example@author_example.cn",
+                        "example@author+test.de" ]
     invalid_emails.each do | address |
       @author.email = address
       assert_not @author.valid?, "#{ address.inspect } should be invalid"
