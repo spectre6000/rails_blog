@@ -5,7 +5,9 @@ class AuthorTest < ActiveSupport::TestCase
   def setup
     @author = Author.new( name: "example author", 
                           email: "author@example.com",
-                          admin: false )
+                          admin: false,
+                          password: "p455w0rd",
+                          password_confirmation: "p455w0rd" )
   end
 
   test "author should be valid" do 
@@ -38,9 +40,9 @@ class AuthorTest < ActiveSupport::TestCase
                       "AN_AUTH-or@example.test.gov",
                       "example.author@example.cn",
                       "example+author@test.de" ]
-    valid_emails.each do |address|
+    valid_emails.each do | address |
       @author.email = address
-      assert @author.valid?, "#{address.inspect} should be valid"
+      assert @author.valid?, "#{ address.inspect } should be valid"
     end
   end
 
@@ -50,9 +52,9 @@ class AuthorTest < ActiveSupport::TestCase
                       "AN_AUTH-or@example",
                       "example@author_example.cn",
                       "example@author+test.de" ]
-    invalid_emails.each do |address|
+    invalid_emails.each do | address |
       @author.email = address
-      assert_not @author.valid?, "#{address.inspect} should be invalid"
+      assert_not @author.valid?, "#{ address.inspect } should be invalid"
     end
   end
 
@@ -61,6 +63,16 @@ class AuthorTest < ActiveSupport::TestCase
     duplicate_author.email = @author.email.downcase
     @author.save
     assert_not duplicate_author.valid?
+  end
+
+  test "password should be non-blank" do 
+    @author.password = @author.password_confirmation = ''
+    assert_not @author.valid?
+  end
+
+  test "password should be at least 6 characters" do 
+    @author.password = @author.password_confirmation = "bruce"
+    assert_not @author.valid?
   end
 
 end
