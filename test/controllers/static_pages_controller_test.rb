@@ -3,7 +3,7 @@ require 'test_helper'
 class StaticPagesControllerTest < ActionController::TestCase
   
   def setup
-    @page_title = "Blognamehere"
+    @page_title = "#{Rails.application.config.blog_title}"
   end
 
   test "should get home" do

@@ -1,5 +1,9 @@
 class AuthorsController < ApplicationController
 
+  def index 
+
+  end
+  
   def show
     @author = Author.find( params[ :id ] )
   end
@@ -11,7 +15,8 @@ class AuthorsController < ApplicationController
   def create
     @author = Author.new( author_params )
     if @author.save
-
+      flash[ :success ] = "Welcome to " + Rails.application.config.blog_title + "!"
+      redirect_to @author
     else
       render 'new'
     end

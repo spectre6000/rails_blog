@@ -13,4 +13,15 @@ class AuthorsSignupTest < ActionDispatch::IntegrationTest
     assert_template 'authors/new'
   end
 
+  test "valid signup information" do
+    get new_author_path
+    assert_difference 'Author.count', 1 do
+      post_via_redirect authors_path, author: { name: 'test_author',
+                                                email: 'author@valid.com',
+                                                password: 'password',
+                                                password_confirmation: 'password' }
+    end
+    assert_template 'authors/show'
+  end
+
 end
