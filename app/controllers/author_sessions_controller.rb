@@ -16,7 +16,8 @@ class AuthorSessionsController < ApplicationController
   end
 
   def destroy
-
+    author_log_out
+    redirect_to root_url
   end
 
 end

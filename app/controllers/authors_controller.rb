@@ -15,6 +15,7 @@ class AuthorsController < ApplicationController
   def create
     @author = Author.new( author_params )
     if @author.save
+      author_log_in @author
       flash[ :success ] = "Welcome to " + Rails.application.config.blog_title + "!"
       redirect_to @author
     else

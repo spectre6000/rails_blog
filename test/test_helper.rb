@@ -8,5 +8,8 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  def author_is_logged_in?
+    !session[ :author_id ].nil?
+  end
+
 end

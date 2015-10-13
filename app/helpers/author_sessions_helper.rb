@@ -12,4 +12,9 @@ module AuthorSessionsHelper
     !current_author.nil?
   end
 
+  def author_log_out
+    session.delete( :author_id )
+    @current_author = nil
+  end
+
 end

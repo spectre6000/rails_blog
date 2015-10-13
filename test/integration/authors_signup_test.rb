@@ -22,6 +22,7 @@ class AuthorsSignupTest < ActionDispatch::IntegrationTest
                                                 password_confirmation: 'password' }
     end
     assert_template 'authors/show'
+    assert author_is_logged_in?
   end
 
 end
