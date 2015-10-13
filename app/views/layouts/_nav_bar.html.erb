@@ -2,6 +2,16 @@
   <ul>
     <li><%= link_to "Home", root_path %></li>
     <li><%= link_to "About", about_path %></li>
-    <li><%= link_to "Log in", '#' %></li>
+    <% if author_logged_in? %>
+      <li><%= link_to "Authors", '#' %></li>
+      <li><a href="#">Account</a></li>
+      <ul>
+        <li><%= link_to "Profile", current_author %></li>
+        <li><%= link_to "settings", '#' %></li>
+        <li><%= link_to "Log out", author_logout_path, method: 'delete' %></li>
+      </ul>
+    <% else %>
+      <li><%= link_to "Log in", author_login_path %></li>
+    <% end %>
   </ul>
 </nav>
