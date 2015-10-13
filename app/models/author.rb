@@ -12,12 +12,12 @@ class Author < ActiveRecord::Base
   validates :password,  presence: true,
                         length: { minimum: 6 }
 
-  def Author.digest( string )
+  def self.digest( string )
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create( string, cost: cost )
   end
 
-  def Author.new_token
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
 
