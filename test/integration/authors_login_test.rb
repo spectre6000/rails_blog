@@ -37,4 +37,14 @@ class AuthorsLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", author_path( @author ), count: 0
   end
 
+  test "loign with remembering" do 
+    log_in_as( @author, remember_me: '1' )
+    assert_not_nil cookies[ 'remember_token' ]
+  end
+
+  test "login without remembering" do 
+    log_in_as( @author, remember_me: '0' )
+    assert_nil cookies[ 'remember_token' ]
+  end
+
 end
