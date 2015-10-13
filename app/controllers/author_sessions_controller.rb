@@ -8,6 +8,7 @@ class AuthorSessionsController < ApplicationController
     author = Author.find_by( email: params[ :session ][ :email ].downcase )
     if author && author.authenticate( params[ :session ][ :password ] )
       author_log_in author
+      remember_author author
       redirect_to author
     else
       flash.now[ :danger ] = 'Invalid email/password combination.'
@@ -16,7 +17,7 @@ class AuthorSessionsController < ApplicationController
   end
 
   def destroy
-    author_log_out
+    author_log_out if author_logged_in?
     redirect_to root_url
   end
 

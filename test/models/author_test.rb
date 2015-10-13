@@ -76,4 +76,8 @@ class AuthorTest < ActiveSupport::TestCase
     assert_not @author.valid?
   end
 
+  test "author_authenticated? should return false for an author with nil digest" do 
+    assert_not @author.author_authenticated?( '' )
+  end
+
 end
