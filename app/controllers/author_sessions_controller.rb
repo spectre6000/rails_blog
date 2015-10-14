@@ -9,7 +9,7 @@ class AuthorSessionsController < ApplicationController
     if @author && @author.authenticate( params[ :session ][ :password ] )
       author_log_in @author
       params[ :session ][ :remember_me ] == '1' ? remember_author( @author ) : forget_author( @author )
-      redirect_to @author
+      redirect_back_or @author
     else
       flash.now[ :danger ] = 'Invalid email/password combination.'
       render 'new'

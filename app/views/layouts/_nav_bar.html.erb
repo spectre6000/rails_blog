@@ -7,7 +7,7 @@
       <li><a href="#">Account</a></li>
       <ul>
         <li><%= link_to "Profile", current_author %></li>
-        <li><%= link_to "settings", '#' %></li>
+        <li><%= link_to "settings", edit_author_path(current_author) %></li>
         <li><%= link_to "Log out", author_logout_path, method: 'delete' %></li>
       </ul>
     <% else %>

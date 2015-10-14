@@ -1,13 +1,19 @@
 module AuthorSessionsHelper
 
+  # Logs in the given author.
   def author_log_in( author )
     session[ :author_id ] = author.id
   end
 
+  # Remembers an author in a persistent session.
   def remember_author( author )
     author.remember_author
     cookies.permanent.signed[ :author_id ] = author.id
     cookies.permanent[ :remember_token ] = author.remember_token
+  end
+
+  def current_author?( author )
+    author == current_author
   end
 
   def current_author
@@ -36,6 +42,17 @@ module AuthorSessionsHelper
     forget_author( current_author )
     session.delete( :author_id )
     @current_author = nil
+  end
+
+  # Redirects to stored location (or to the default).
+  def redirect_back_or( default )
+    redirect_to( session[ :forwarding_url ] || default )
+    session.delete( :forwarding_url )
+  end
+
+  # Stores the URL trying to be accessed.
+  def store_location
+    session[ :forwarding_url ] = request.url if request.get?
   end
 
 end
