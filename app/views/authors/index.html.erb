@@ -1,0 +1,11 @@
+<% provide( :title, "All authors" ) %>
+<h1>All authors</h1>
+
+<ul>
+  <% @authors.each do | author | %>
+    <li>
+      <p>image for author</p>
+      <%= link_to author.name, author %>
+    </li>
+  <% end %>
+</ul>
