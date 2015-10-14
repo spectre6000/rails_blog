@@ -40,4 +40,19 @@ class AuthorsControllerTest < ActionController::TestCase
     assert_redirected_to root_url
   end
 
+  test "should redirect destroy when not logged in" do
+    assert_no_difference 'Author.count' do
+      delete :destroy, id: @author
+    end
+    assert_redirected_to author_login_url
+  end
+
+  test "should redirect destroy when logged in as non-admin" do 
+    log_in_as( @other_author )
+    assert_no_difference 'Author.count' do 
+      delete :destroy, id: @author
+    end
+    assert_redirected_to root_url
+  end
+
 end

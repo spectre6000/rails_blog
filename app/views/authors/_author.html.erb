@@ -1,0 +1,8 @@
+<li>
+  <p>image for author</p>
+  <%= link_to author.name, author %>
+  <% if current_author.admin? && !current_author?( author ) %>
+    | <%= link_to "delete", author, method: :delete,
+                                    data: { confirm: "Are you sure?" } %>
+  <% end %>
+</li>
