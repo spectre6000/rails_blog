@@ -1,6 +1,8 @@
 <% provide( :title, "All authors" ) %>
 <h1>All authors</h1>
 
+<%= will_paginate %>
+
 <ul>
   <% @authors.each do | author | %>
     <li>
@@ -9,3 +11,5 @@
     </li>
   <% end %>
 </ul>
+
+<%= will_paginate %>

@@ -4,7 +4,7 @@ class AuthorsController < ApplicationController
   before_action :correct_author,    only: [ :edit, :update ]
 
   def index 
-    @authors = Author.all
+    @authors = Author.paginate( page: params[ :page ] )
   end
   
   def show

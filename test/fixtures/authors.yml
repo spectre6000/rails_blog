@@ -1,9 +1,6 @@
-author1:
-  name: Author1 Test
-  email: author1@test.com
+<% 50.times do | n | %>
+author<%= n %>:
+  name: <%= "Author#{ n } Test" %>
+  email: <%= "author#{ n }@test.com" %>
   password_digest: <%= Author.digest( 'password' ) %>
-
-author2:
-  name: Author2 Test
-  email: author2@test.com
-  password_digest: <%= Author.digest( 'password' ) %>
+<% end %>  
