@@ -19,8 +19,12 @@ class AuthorsEditTest < ActionDispatch::IntegrationTest
 
   test "successful edit with friendly forwarding" do 
     get edit_author_path( @author )
+    assert_equal session[ :forwarding_url ], edit_author_url( @author )
     log_in_as( @author )
     assert_redirected_to edit_author_path( @author )
+    assert_equal session[ :forwarding_url ], nil
+    log_in_as( @author )
+    assert_redirected_to author_path( @author )
     name = "Test Author"
     email = "test@author.com"
     patch author_path( @author ), author: { name: name,
